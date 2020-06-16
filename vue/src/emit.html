@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>$emit</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <son :data-from-father="count" @method-from-father="addCount"></son>
+        </div>
+        
+
+        <template id="son">
+            <div>
+                <div>{{ dataFromFather }}</div>
+                <input type="submit" @click.prevent="clickButton" />
+            </div>
+        </template>
+    </body>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                count: 0
+            },
+            methods: {
+                addCount() {
+                    this.count++;
+                }
+            },
+            components: {
+                son: {
+                    template: "#son",
+                    props: [ "dataFromFather" ],
+                    methods: {
+                        clickButton() {
+                            this.$emit("method-from-father");
+                        }
+                    }
+                }
+            } 
+        });
+    
+
+
+    </script>
+</html>

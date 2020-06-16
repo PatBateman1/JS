@@ -20,3 +20,4 @@ console.log(SubType.prototype.__proto__ === SuperType.prototype)
 // true
 
 console.log(sub.__proto__)
+// SuperType { superProperty: 1 }
