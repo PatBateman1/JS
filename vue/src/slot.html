@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>slot</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app1">
+            <!-- <son>{{ descriptions[0] }}</son> --> 
+            <!-- Tom is stupid -->
+
+            <son>
+                <template v-slot:smart></template>
+            </son>
+            <!-- Tom is smart -->
+        </div>
+
+        <template id="tp1">
+            <div>
+                Tom is
+                <slot></slot>
+                <slot name="smart">
+                    <p>smart</p>
+                </slot>  
+            </div>
+        </template>
+
+        <template id="tp2">
+            <div>
+                Tom is
+                
+            </div>
+        </template>
+
+        <script>
+            Vue.component("son", { template: "#tp1" })
+            Vue.component("grandson", { template: "#tp2" })
+
+            let vm = new Vue({
+                el: "#app1",
+                data: {
+                    descriptions: ["stupid", "smart"] 
+                }
+            })
+        </script>
+
+    </body>
+</html>

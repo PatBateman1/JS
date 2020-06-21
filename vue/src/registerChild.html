@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>registerChild</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app1">
+            <child1/>
+        </div>
+
+        <div id="app2">
+            <child2/>
+        </div>
+
+        <div id="app3">
+            <child3/>
+        </div>
+
+        <template id="child2">
+            <h1>child2</h1>
+        </template>
+        
+        <script>
+            Vue.component("child3", { template: `<h1>child3</h1>` });
+
+            let vm1 = new Vue({
+                el: "#app1",
+                components: {
+                    child1: { template: `<h1>child1</h1>` },
+                    child2: { template: "#child2" } 
+                }
+            });
+
+            let vm2 = new Vue({ el: "#app2" });
+
+            let vm3 = new Vue({ el: "#app3" })
+
+           
+        </script>
+    </body>
+</html>
