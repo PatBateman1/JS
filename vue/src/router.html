@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Router</title>
+        <script src="../node_modules/vue/dist/vue.js"></script>
+        <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>Hello from app</h1>
+            <router-view></router-view>
+        </div>
+        
+        <script>
+            const Page1 = { template: '<div>Page1</div>' };
+            const Page2 = { template: '<div>Page2</div>' };
+
+            let router = new VueRouter({
+                routes: [
+                    {
+                        path: '/page1',
+                        component: Page1,
+                        // local
+                        beforeEnter: (to, from, next) => {
+                            alert("local");
+                            next();
+                        }
+                    },
+                    {
+                        path: '/page2',
+                        component: Page2
+                    }
+                ]
+            });
+            // global guard
+            router.beforeEach((to, from, next) => {
+                            alert("global");
+                            next();
+                        });
+            
+            
+            let vm = new Vue({
+                el: '#app',
+                router: router
+            });   
+        </script>
+    </body>
+</html>
